@@ -1,0 +1,11 @@
+node_modules
+public
+.husky
+
+# Ignore artifacts:
+.prettierignore
+package-lock.json
+.env
+.dev.env
+commitlint.config
+.gitignore
