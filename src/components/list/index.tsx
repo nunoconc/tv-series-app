@@ -1,28 +1,29 @@
 import React from 'react';
 import { Episode } from '../../types/episode';
+import Item from './item';
 
 interface IList {
     episodes: Episode[];
 }
 
 function List({ episodes }: IList) {
-    console.log(episodes);
-
     return (
-        <table className="table-auto w-full border-collapse">
-            <thead>
-                <tr className="table-row">
-                    <th className="table-cell">Title</th>
-                    <th className="table-cell">Series</th>
-                    <th className="table-cell">Actions</th>
+        <table className="w-11/12 bg-white shadow-md rounded-lg overflow-hidden mt-10 mx-auto">
+            <thead className="bg-gray-800 text-white">
+                <tr>
+                    <th className="py-3 px-6 text-left font-semibold">
+                        Series
+                    </th>
+                    <th className="py-3 px-6 text-left font-semibold">Title</th>
+                    <th className="py-3 px-6 text-left font-semibold w-10 text-center">
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr className="table-row">
-                    <td className="table-cell">test</td>
-                    <td className="table-cell">test</td>
-                    <td className="table-cell">test</td>
-                </tr>
+                {episodes.map((episode) => (
+                    <Item key={episode.id} episode={episode} />
+                ))}
             </tbody>
         </table>
     );

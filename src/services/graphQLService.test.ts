@@ -6,10 +6,6 @@ import {
     DELETE_EPISODE,
     UPDATE_EPISODE,
 } from '../graphQL/mutations';
-import { ON_CREATE_EPISODE } from '../graphQL/subscriptions';
-import { FetchResult, Observable } from '@apollo/client';
-
-jest.setTimeout(60000000);
 
 describe('GraphQLService - Test', () => {
     const client = graphQLService.init();
