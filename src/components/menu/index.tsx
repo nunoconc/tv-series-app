@@ -13,7 +13,7 @@ function Menu({ options }: IDropdown) {
         <div className="relative flex justify-center space-x-10">
             {options.map((option, index) =>(
                 <button
-                    className={""}
+                    className={"bg-orange-500 hover:bg-orange-700 text-white font-bold py-1 px-1 rounded"}
                     key={index}
                     onClick={option.action}
                 >

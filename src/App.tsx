@@ -1,36 +1,15 @@
 import React from 'react';
-import List from './components/list';
-import { useQuery } from '@apollo/client';
-import { LIST_EPISODES, LIST_EPISODES_SEARCH } from './graphQL/queries';
-import { Episode } from './types/episode';
-import Header from './components/header';
+import Router from './router';
+import graphQLService from './services/graphQLService';
+import { ApolloProvider } from '@apollo/client';
 
 function App() {
-    const [search, setSearch] = React.useState('');
-
-    const { data, error, loading} = useQuery<{listEpisodes: Episode[]}>(
-        search ? LIST_EPISODES_SEARCH : LIST_EPISODES,{
-        variables: {
-            search,
-        },
-    });
-
-    const renderList = () => {
-        if(loading) {
-            return <div>Loading...</div>;
-        }
-        else if(error) {
-            return <div>Error...</div>;
-        } else {
-            return <List episodes={data?.listEpisodes || []} />;
-        }
-    };
+    const client = graphQLService.init();
 
     return (
-        <div>
-            <Header callback={setSearch}/>
-            {renderList()}
-        </div>
+        <ApolloProvider client={client}>
+            <Router />
+        </ApolloProvider>
     );
 }
 

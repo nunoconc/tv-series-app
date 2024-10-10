@@ -12,9 +12,9 @@ function List({ episodes }: IList) {
             <thead className="bg-gray-800 text-white">
                 <tr>
                     <th className="py-3 px-6 text-left font-semibold">
-                        Series
+                        Title
                     </th>
-                    <th className="py-3 px-6 text-left font-semibold">Title</th>
+                    <th className="py-3 px-6 text-left font-semibold">Series</th>
                     <th className="py-3 px-6 text-left font-semibold w-10 text-center">
                         Actions
                     </th>
@@ -22,7 +22,7 @@ function List({ episodes }: IList) {
             </thead>
             <tbody>
                 {episodes.map((episode) => (
-                    <Item key={episode.id} episode={episode} />
+                    <Item key={episode.id} episode={episode}/>
                 ))}
             </tbody>
         </table>
