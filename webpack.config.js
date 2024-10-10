@@ -1,13 +1,18 @@
 import path from 'path';
 
 module.exports = {
-    entry: './src/index.ts',
+    entry: './src/index.tsx',
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'ts-loader',
                 exclude: /node_modules/,
+                use: [
+                    'ts-loader',
+                    'style-loader',
+                    'css-loader',
+                    'postcss-loader',
+                ],
             },
         ],
     },
