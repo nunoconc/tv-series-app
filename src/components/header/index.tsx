@@ -1,6 +1,8 @@
 import React from 'react';
 import { debounce } from 'lodash';
 import { useNavigate } from 'react-router-dom';
+import { addSVG } from '../icons/svg';
+import Popup from '../popup';
 
 interface IHeader {
     // eslint-disable-next-line no-unused-vars
@@ -28,12 +30,15 @@ function Header({ callback }: IHeader) {
                     onChange={handleSearch}
                 />
             )}
-            <button
-                className="py-2 px-4 rounded-md bg-gray-200 hover:bg-gray-400 shadow-md text-slate-900"
-                onClick={() => console.log('Create')}
-            >
-                Create
-            </button>
+            <Popup>
+                <div
+                    className="py-2 px-4 rounded-md bg-gray-200 hover:bg-gray-400 shadow-md text-slate-900"
+                    onClick={() => console.log('Create')}
+                >
+                    {addSVG()}
+                </div>
+            </Popup>
+
         </header>
     );
 }

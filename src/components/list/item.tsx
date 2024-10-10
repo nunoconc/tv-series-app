@@ -35,7 +35,7 @@ function Item({ episode }: IItem) {
             </th>
             <th className="px-6 items-center text-left">{episode.series}</th>
             <th className="px-6 items-center">
-                <Menu callback={handleMenuClick} />
+                <Menu callback={handleMenuClick} episode={episode}/>
             </th>
         </tr>
     );

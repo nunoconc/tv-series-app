@@ -41,7 +41,7 @@ function IDetails({ episode }: IDetails) {
                         <strong>IMDB ID:</strong> {episode.imdbId}
                     </p>
                     <div className="flex justify-start">
-                        <Menu callback={handleMenuClick} />
+                        <Menu callback={handleMenuClick} episode={episode} />
                     </div>
                 </div>
                 <div className="md:w-1/2 p-4">
