@@ -1,25 +1,27 @@
 import React from 'react';
+import { deleteSVG, editSVG } from '../icons/svg';
 
-interface IDropdown {
-    options: {
-        label: string;
-        action: () => void;
-    }[];
+
+interface IMenu {
+    // eslint-disable-next-line no-unused-vars
+    callback: (action: string) => void;
 }
-
-function Menu({ options }: IDropdown) {
+function Menu({callback}: IMenu) {
 
     return (
-        <div className="relative flex justify-center space-x-10">
-            {options.map((option, index) =>(
-                <button
-                    className={"bg-orange-500 hover:bg-orange-700 text-white font-bold py-1 px-1 rounded"}
-                    key={index}
-                    onClick={option.action}
-                >
-                    {option.label}
-                </button>
-            ))}
+        <div className="flex justify-center space-x-10">
+            <button
+                onClick={()=> callback('edit')}
+                className="p-2 rounded-md bg-gray-200 hover:bg-gray-400 shadow-md"
+            >
+                {editSVG()}
+            </button>
+            <button
+                onClick={()=> callback('delete')}
+                className="p-2 rounded-md bg-gray-200 hover:bg-gray-400 shadow-md"
+            >
+                {deleteSVG()}
+            </button>
         </div>
     );
 }

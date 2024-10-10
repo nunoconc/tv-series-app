@@ -1,6 +1,6 @@
 import React from 'react';
 import Details from '../components/details';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Episode } from '../types/episode';
 import Header from '../components/header';
 import { useQuery } from '@apollo/client';

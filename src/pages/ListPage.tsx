@@ -18,7 +18,7 @@ function ListPage() {
     );
 
     if (error) {
-        throw error;
+        throw error.cause;
     }
 
     return (

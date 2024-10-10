@@ -29,7 +29,7 @@ function Header({ callback }: IHeader) {
                 />
             )}
             <button
-                className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+                className="py-2 px-4 rounded-md bg-gray-200 hover:bg-gray-400 shadow-md text-slate-900"
                 onClick={() => console.log('Create')}
             >
                 Create
