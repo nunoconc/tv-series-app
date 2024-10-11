@@ -1,23 +1,23 @@
 import React from 'react';
 import { Episode } from '../../types/episode';
-import Menu from '../menu';
+import IconButton from '../iconButton';
+import Popup from '../popup';
 
 interface IDetails {
     episode: Episode;
 }
 
 function IDetails({ episode }: IDetails) {
-    const handleMenuClick = (action: string) => {
-        if (action === 'edit') {
-            console.log('Edit');
-        } else {
-            console.log('Delete');
-        }
-    };
-
     return (
         <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
             <div className="flex flex-col md:flex-row">
+                <div className="md:w-1/2 p-4">
+                    <img
+                        className="h-full w-full object-cover rounded-lg shadow-md"
+                        src={'../favicon-192x192.png'}
+                        alt={'Movie Poster'}
+                    />
+                </div>
                 <div className="md:w-1/2 p-4">
                     <h2 className="text-4xl font-bold mb-4 text-gray-800">
                         {episode.title}
@@ -40,16 +40,14 @@ function IDetails({ episode }: IDetails) {
                     <p className="text-lg mb-4">
                         <strong>IMDB ID:</strong> {episode.imdbId}
                     </p>
-                    <div className="flex justify-start">
-                        <Menu callback={handleMenuClick} episode={episode} />
+                    <div className="flex justify-start space-x-4">
+                        <Popup type={'form'} episode={episode}>
+                            <IconButton icon={'update'} />
+                        </Popup>
+                        <Popup type={'confirmation'} episode={episode}>
+                            <IconButton icon={'remove'} />
+                        </Popup>
                     </div>
-                </div>
-                <div className="md:w-1/2 p-4">
-                    <img
-                        className="h-full w-full object-cover rounded-lg shadow-md"
-                        src={'../favicon-192x192.png'}
-                        alt={'Movie Poster'}
-                    />
                 </div>
             </div>
         </div>
