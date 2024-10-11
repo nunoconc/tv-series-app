@@ -6,7 +6,6 @@ import { Episode } from '../types/episode';
 import Header from '../components/header';
 import Loading from '../components/loading';
 import Error from '../components/error';
-import Details from '../components/details';
 
 function ListPage() {
     const [search, setSearch] = React.useState('');

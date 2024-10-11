@@ -11,6 +11,16 @@ export type Episode = {
     imdbId: string;
 };
 
+export type OmdbEpisode = {
+    Series: string;
+    Title: string;
+    Plot: string;
+    Season: number;
+    Episode: number;
+    Released: string;
+    imdbID: string;
+};
+
 
 export const EpisodeForm: {
     id: keyof Episode;

@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Episode } from '../../types/episode';
 import IconButton from '../iconButton';
 import Popup from '../popup';
+import { useAppContext } from '../../context/appContext';
 
 interface IDetails {
     episode?: Episode;
 }
 
 function IDetails({ episode }: IDetails) {
+    const [imageUrl, setImageUrl] = useState<string>();
+    const context = useAppContext();
+
+    useEffect(() => {
+        if(episode?.imdbId) {
+            context.omdbServiceInstance?.getImage(episode?.imdbId).then(setImageUrl);
+        }
+
+    }, [episode?.imdbId]);
+
     if(!episode) {
         return (
             <div className="w-11/12 bg-white shadow-md rounded-lg overflow-hidden mt-10 mx-auto">
@@ -21,8 +32,8 @@ function IDetails({ episode }: IDetails) {
                 <div className="md:w-1/2 p-4">
                     <img
                         className="h-full w-full object-cover rounded-lg shadow-md"
-                        src={'../favicon-192x192.png'}
                         alt={'Movie Poster'}
+                        src={imageUrl || '../favicon-192x192.png'}
                     />
                 </div>
                 <div className="md:w-1/2 p-4">

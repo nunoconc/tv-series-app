@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Episode, EpisodeForm } from '../../types/episode';
 import IconButton from '../iconButton';
 import { useMutation } from '@apollo/client';
 import { CREATE_EPISODE, UPDATE_EPISODE } from '../../graphQL/mutations';
 import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../../context/appContext';
+import Loading from '../loading';
 
 interface IForm {
     episode?: Episode;
@@ -11,7 +13,24 @@ interface IForm {
 }
 
 function Form({ episode, onCancel }: IForm) {
+    const [formEpisode, setFormEpisode] = useState(episode);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const context = useAppContext();
+
+    const handleOmdb = () => {
+        const imdbId = (
+            document.getElementById('input_imdbId') as HTMLInputElement
+        ).value;
+        if (imdbId) {
+            setLoading(true);
+            context.omdbServiceInstance
+                ?.getEpisode(imdbId)
+                .then(setFormEpisode)
+                .finally(() => setLoading(false));
+        }
+    };
+
     const [createOrUpdate] = useMutation(
         episode ? UPDATE_EPISODE : CREATE_EPISODE
     );
@@ -48,10 +67,10 @@ function Form({ episode, onCancel }: IForm) {
 
     return (
         <form
-            className="w-full h-full p-6 space-y-6 bg-white"
+            className="w-full h-full p-6 space-y-3"
             onSubmit={handleSubmit}
         >
-            <label className="block text-lg font-bold mb-4">
+            <label className="block text-lg font-bold">
                 Please insert all the episodes information bellow:
             </label>
             {EpisodeForm.map((form) => (
@@ -60,19 +79,24 @@ function Form({ episode, onCancel }: IForm) {
                         <strong>{form.label}:</strong>
                     </label>
                     <input
-                        id={form.id}
+                        id={`input_${form.id}`}
                         name={form.id}
                         type={form.type}
                         required
-                        defaultValue={episode?.[form.id]}
+                        defaultValue={formEpisode?.[form.id]}
                         className="w-full p-3 border rounded"
                     />
                 </div>
             ))}
-            <div className="flex justify-between pt-10">
-                <IconButton icon={'cancel'} onClick={onCancel} />
-                <IconButton icon={'confirm'} submit />
-            </div>
+            {loading ? (
+                <Loading />
+            ) : (
+                <div className="flex justify-between pt-1">
+                    <IconButton icon={'cancel'} onClick={onCancel} />
+                    <IconButton icon={'download'} onClick={handleOmdb} />
+                    <IconButton icon={'confirm'} submit />
+                </div>
+            )}
         </form>
     );
 }

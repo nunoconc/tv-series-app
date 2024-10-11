@@ -2,7 +2,7 @@ import svg from './svg';
 import React from 'react';
 
 interface IICon {
-    icon: 'remove' | 'create' | 'close' | 'update' | 'confirm' | 'cancel' | 'info';
+    icon: 'remove' | 'create' | 'close' | 'update' | 'confirm' | 'cancel' | 'info' | 'download';
     size?: 'small' | 'medium';
     submit?: boolean;
     onClick?: () => void;

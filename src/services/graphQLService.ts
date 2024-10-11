@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client';
+import { ApolloClient, HttpLink, InMemoryCache, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
@@ -42,15 +42,13 @@ function init() {
         httpLink
     );
 
-    const client = new ApolloClient({
+    return new ApolloClient({
         link: splitLink,
         cache: new InMemoryCache({
             // configure cache options
         }),
         credentials: `{x-api-key : '${apiKey}'}`,
     });
-
-    return client;
 }
 
 export default {

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Episode } from '../../types/episode';
 import { useNavigate } from 'react-router-dom';
 import IconButton from '../iconButton';
-import Popup from '../popup';
+import { useAppContext } from '../../context/appContext';
 
 interface IItem {
     episode: Episode;
@@ -10,6 +10,15 @@ interface IItem {
 
 function Item({ episode }: IItem) {
     const navigate = useNavigate();
+    const [imageUrl, setImageUrl] = useState<string>();
+    const context = useAppContext();
+
+    useEffect(() => {
+        if(episode?.imdbId) {
+            context.omdbServiceInstance?.getImage(episode?.imdbId).then(setImageUrl);
+        }
+
+    }, [episode?.imdbId]);
 
     const navigateToDetails = () => {
         navigate(`/details/${episode.id}`);
@@ -19,13 +28,13 @@ function Item({ episode }: IItem) {
         <tr className="table-row">
             <th className="py-3 px-6 text-left flex items-center">
                 <div
-                    className="h-20 w-10 bg-blackv cursor-pointer"
+                    className="h-20 w-20 bg-blackv cursor-pointer"
                     onClick={navigateToDetails}
                 >
                     <img
                         className="h-full w-full mx-1/2"
-                        src={'../favicon-192x192.png'}
-                        alt={'?'}
+                        alt={'TV'}
+                        src={imageUrl || '../favicon-192x192.png'}
                     />
                 </div>
                 <span className="px-6 text-left">{episode.title}</span>

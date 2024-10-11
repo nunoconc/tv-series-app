@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 import Modal from 'react-modal';
 import { Episode } from '../../types/episode';
 import Form from './form';
-import IconButton from '../iconButton';
 import Confirmation from './confirmation';
 
 const customStyles = {
@@ -63,12 +62,6 @@ function Popup({ episode, children, type }: IPopup) {
                 }}
                 style={customStyles}
             >
-                <div className="flex justify-end">
-                    <IconButton
-                        icon={'close'}
-                        onClick={() => setIsOpen(false)}
-                    />
-                </div>
                 {renderPopup()}
             </Modal>
         </div>
