@@ -5,11 +5,13 @@ import { Episode } from '../types/episode';
 import Header from '../components/header';
 import { useQuery } from '@apollo/client';
 import { GET_EPISODE_BY_ID } from '../graphQL/queries';
+import Loading from '../components/loading';
+import Error from '../components/error';
 
 function DetailsPage() {
     const id = useParams().id;
 
-    const { data, error} = useQuery<{ getEpisodeById: Episode }>(
+    const { data, error, loading } = useQuery<{ getEpisodeById: Episode }>(
         GET_EPISODE_BY_ID,
         {
             variables: {
@@ -18,22 +20,25 @@ function DetailsPage() {
         }
     );
 
-    if (error) {
-        throw error.cause;
-    }
+    const renderDetails = () => {
+        if (error) {
+            console.log(error.cause);
+            return <Error message={error.message} />;
+        }
 
-    if (data) {
-        return (
-            <>
-                <Header />
-                {data ? (
-                    <Details episode={data.getEpisodeById} />
-                ) : (
-                    <p>loading..</p>
-                )}
-            </>
-        );
-    }
+        if (loading) {
+            return <Loading />;
+        }
+
+        return <Details episode={data?.getEpisodeById} />;
+    };
+
+    return (
+        <>
+            <Header />
+            {renderDetails()}
+        </>
+    );
 }
 
 export default DetailsPage;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import {
     createBrowserRouter,
     Navigate,
@@ -6,30 +6,43 @@ import {
 } from 'react-router-dom';
 import ListPage from '../pages/ListPage';
 import DetailsPage from '../pages/DetailsPage';
+import Header from '../components/header';
+import Loading from '../components/loading';
+import Error from '../components/error';
 
 function Router() {
+    const LoadingOrError = useCallback(
+        (error?: boolean) => (
+            <>
+                <Header />
+                {error ? <Error /> : <Loading />}
+            </>
+        ),
+        []
+    );
+
     const router = createBrowserRouter([
         {
             path: '/list',
             element: <ListPage />,
-            hydrateFallbackElement: <p>loading..</p>,
-            errorElement: <p>list error..</p>,
+            hydrateFallbackElement: LoadingOrError(),
+            errorElement: LoadingOrError(true),
         },
         {
             path: '/details/:id',
             element: <DetailsPage />,
-            hydrateFallbackElement: <p>loading..</p>,
-            errorElement: <p>details error..</p>,
+            hydrateFallbackElement: LoadingOrError(),
+            errorElement: LoadingOrError(true),
         },
         {
             path: '*',
             element: <Navigate to="/list" replace={true} />,
-            hydrateFallbackElement: <p>loading..</p>,
-            errorElement: <p>error..</p>,
+            hydrateFallbackElement: LoadingOrError(),
+            errorElement: LoadingOrError(true),
         },
     ]);
 
-    return  <RouterProvider router={router} />;
+    return <RouterProvider router={router} />;
 }
 
 export default Router;

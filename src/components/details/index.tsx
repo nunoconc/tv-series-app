@@ -4,10 +4,17 @@ import IconButton from '../iconButton';
 import Popup from '../popup';
 
 interface IDetails {
-    episode: Episode;
+    episode?: Episode;
 }
 
 function IDetails({ episode }: IDetails) {
+    if(!episode) {
+        return (
+            <div className="w-11/12 bg-white shadow-md rounded-lg overflow-hidden mt-10 mx-auto">
+                <h1 className="text-2xl text-center p-6">No episode found</h1>
+            </div>
+        );
+    }
     return (
         <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
             <div className="flex flex-col md:flex-row">

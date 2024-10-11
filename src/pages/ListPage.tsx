@@ -4,11 +4,14 @@ import { useQuery } from '@apollo/client';
 import { LIST_EPISODES, LIST_EPISODES_SEARCH } from '../graphQL/queries';
 import { Episode } from '../types/episode';
 import Header from '../components/header';
+import Loading from '../components/loading';
+import Error from '../components/error';
+import Details from '../components/details';
 
 function ListPage() {
     const [search, setSearch] = React.useState('');
 
-    const { data, error } = useQuery<{ listEpisodes: Episode[] }>(
+    const { data, error, loading } = useQuery<{ listEpisodes: Episode[] }>(
         search ? LIST_EPISODES_SEARCH : LIST_EPISODES,
         {
             variables: {
@@ -17,14 +20,23 @@ function ListPage() {
         }
     );
 
-    if (error) {
-        throw error.cause;
-    }
+    const renderList = () => {
+        if (error) {
+            console.log(error.cause);
+            return <Error message={error.message} />;
+        }
+
+        if (loading) {
+            return <Loading/>;
+        }
+
+        return <List episodes={data?.listEpisodes || []} />;
+    };
 
     return (
         <>
-            <Header callback={setSearch} />
-            {data ? <List episodes={data.listEpisodes} /> : <p>loading..</p>}
+            <Header callback={setSearch}/>
+            {renderList()}
         </>
     );
 }

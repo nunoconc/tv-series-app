@@ -7,6 +7,15 @@ interface IList {
 }
 
 function List({ episodes }: IList) {
+
+    if(!episodes.length) {
+        return (
+            <div className="w-11/12 bg-white shadow-md rounded-lg overflow-hidden mt-10 mx-auto">
+                <h1 className="text-2xl text-center p-6">No episodes found</h1>
+            </div>
+        );
+    }
+
     return (
         <table className="w-11/12 bg-white shadow-md rounded-lg overflow-hidden mt-10 mx-auto">
             <thead className="bg-gray-800 text-white">
