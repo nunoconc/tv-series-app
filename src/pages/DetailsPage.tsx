@@ -8,6 +8,8 @@ import { GET_EPISODE_BY_ID } from '../graphQL/queries';
 import Loading from '../components/loading';
 import Error from '../components/error';
 
+// This component is responsible for rendering the details of an episode.
+// Used in the route '/details/:id'.
 function DetailsPage() {
     const id = useParams().id;
 

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
+// This file is responsible for rendering the React application.
+
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );

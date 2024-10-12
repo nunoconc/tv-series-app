@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import { setupCache, buildWebStorage } from 'axios-cache-interceptor';
 import { Episode, OmdbEpisode } from '../types/episode';
 
+// OMDBService class (used to interact with the OMDB API)
 class OMDBService {
     private httpUri = process.env.REACT_APP_OMDB_API;
     private apiKey = process.env.REACT_APP_OMDB_KEY;

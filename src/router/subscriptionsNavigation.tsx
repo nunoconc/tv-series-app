@@ -5,6 +5,8 @@ import { ON_CREATE_EPISODE, ON_DELETE_EPISODE, ON_UPDATE_EPISODE } from '../grap
 
 import 'react-toastify/dist/ReactToastify.css';
 
+// This component is responsible for handling the subscriptions of the application to the GraphQL API.
+// Also notifies the user when an episode is created, updated or removed.
 function SubscriptionsNavigation() {
     const { data: create } = useSubscription(ON_CREATE_EPISODE);
     const { data: update } = useSubscription(ON_UPDATE_EPISODE);

@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import IconButton from '../iconButton';
 import { useAppContext } from '../../context/appContext';
 
+// This component is responsible for rendering a row in the list of episodes.
+
 interface IItem {
     episode: Episode;
 }

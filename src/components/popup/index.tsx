@@ -4,6 +4,8 @@ import { Episode } from '../../types/episode';
 import Form from './form';
 import Confirmation from './confirmation';
 
+// This component is responsible for rendering a popup with a form or a confirmation dialog.
+
 const customStyles = {
     content: {
         top: '50%',

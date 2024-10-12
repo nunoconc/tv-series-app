@@ -7,6 +7,8 @@ import Header from '../components/header';
 import Loading from '../components/loading';
 import Error from '../components/error';
 
+// This component is responsible for rendering the list of episodes.
+// Used in the route '/list'.
 function ListPage() {
     const [search, setSearch] = React.useState('');
 

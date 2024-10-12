@@ -11,6 +11,7 @@ import Loading from '../components/loading';
 import Error from '../components/error';
 import SubscriptionsNavigation from './subscriptionsNavigation';
 
+// This component is responsible for handling the routing of the application.
 function Router() {
     const LoadingOrError = useCallback(
         (error?: boolean) => (

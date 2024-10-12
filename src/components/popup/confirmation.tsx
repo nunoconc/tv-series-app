@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loading from '../loading';
 
+// This component is responsible for rendering the confirmation popup used to delete an episode.
+
 interface IDelete {
     id: string;
     onCancel: () => void;

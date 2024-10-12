@@ -4,6 +4,8 @@ import IconButton from '../iconButton';
 import Popup from '../popup';
 import { useAppContext } from '../../context/appContext';
 
+// This component is responsible for rendering the details of an episode.
+
 interface IDetails {
     episode?: Episode;
 }

@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+// This file contains the GraphQL subscriptions used in the application.
 export const ON_CREATE_EPISODE = gql`
     subscription OnCreateEpisode {
         onCreateEpisode {

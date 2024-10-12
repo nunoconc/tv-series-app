@@ -1,5 +1,8 @@
 import React from 'react';
 
+// This component is responsible for rendering an icon button.
+// Stores multiple SVG icons in an object and renders them based on the icon prop.
+
 const remove = (
     <svg
         className="h-8 w-8 text-slate-900"

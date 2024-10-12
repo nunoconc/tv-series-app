@@ -1,5 +1,6 @@
 import { ID } from 'graphql-ws';
 
+// Episode type (used to define the episode object)
 export type Episode = {
     id: ID;
     series: string;
@@ -11,6 +12,7 @@ export type Episode = {
     imdbId: string;
 };
 
+// OmdbEpisode type (used to parse the OMDB API response)
 export type OmdbEpisode = {
     Series: string;
     Title: string;
@@ -21,7 +23,7 @@ export type OmdbEpisode = {
     imdbID: string;
 };
 
-
+// EpisodeForm type (used to generate the form fields)
 export const EpisodeForm: {
     key: keyof Episode;
     label: string;

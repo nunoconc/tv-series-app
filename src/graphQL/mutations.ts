@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+// This file contains the GraphQL mutations used in the application.
 export const CREATE_EPISODE = gql`
     mutation CreateEpisode($episode: EpisodeInput!) {
         createEpisode(episode: $episode) {

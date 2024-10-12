@@ -7,6 +7,7 @@ import {
     UPDATE_EPISODE,
 } from '../graphQL/mutations';
 
+// Here we are testing the GraphQL service by listing, creating, updating and deleting an episode.
 describe('GraphQLService - Test', () => {
     const client = graphQLService.init();
 

@@ -1,3 +1,7 @@
+import React from 'react';
+
+// This component is responsible for rendering a loading spinner.
+
 function Loading() {
     return (
         <div className="flex items-center justify-center fixed inset-0 z-50">

@@ -1,5 +1,7 @@
 import React from 'react';
 
+// This component is responsible for rendering an error message.
+
 interface IError {
     message?: string;
 }

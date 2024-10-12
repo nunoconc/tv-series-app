@@ -3,6 +3,8 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 
+// Graphql service helper init function to load both the http and ws links connecting to the graphql server
+// Using ApolloClient to create the client instance
 function init() {
     const httpUri = process.env.REACT_APP_GRAPHQL_HTTP_URL;
     const wsUri = process.env.REACT_APP_GRAPHQL_WS_URL;

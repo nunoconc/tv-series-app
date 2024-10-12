@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Popup from '../popup';
 import IconButton from '../iconButton';
 
+// This component is responsible for rendering the header of the application.
+
 interface IHeader {
     // eslint-disable-next-line no-unused-vars
     callback?: (search: string) => void;

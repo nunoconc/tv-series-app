@@ -10,6 +10,8 @@ import { wait } from '@apollo/client/testing';
 import lodash from 'lodash';
 import { toast } from 'react-toastify';
 
+// This component is responsible for rendering the form used to create or update an episode.
+
 interface IForm {
     episode?: Episode;
     onCancel: () => void;

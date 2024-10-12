@@ -2,6 +2,8 @@ import React from 'react';
 import { Episode } from '../../types/episode';
 import Item from './item';
 
+// This component is responsible for rendering the list of episodes.
+
 interface IList {
     episodes: Episode[];
 }

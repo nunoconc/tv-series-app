@@ -1,6 +1,8 @@
 import svg from './svg';
 import React from 'react';
 
+// This component is responsible for rendering an icon button.
+
 interface IICon {
     icon: 'remove' | 'create' | 'close' | 'update' | 'confirm' | 'cancel' | 'info' | 'download';
     size?: 'small' | 'medium';

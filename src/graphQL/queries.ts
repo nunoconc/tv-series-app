@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+// This file contains the GraphQL queries used in the application.
 export const LIST_EPISODES = gql`
     query ListEpisodes {
         listEpisodes {

@@ -6,6 +6,9 @@ import React, {
 } from 'react';
 import OmbdService from '../services/ombdService';
 
+// This file is responsible for creating the AppContext, which is used to store the OMDB service instance.
+//Could be used to store other services, configurations, or global state.
+
 interface IAppContext {
     omdbServiceInstance?: OmbdService;
 }
