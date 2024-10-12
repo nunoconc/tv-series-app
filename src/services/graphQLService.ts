@@ -27,7 +27,10 @@ function init() {
         createClient({
             url: wsUri,
             connectionParams: {
-                'x-api-key': apiKey,
+                headers: {
+                    'x-api-key': apiKey
+                },
+                protocol: 'graphql-ws',
             },
             shouldRetry: (error) => {
                 console.log('shouldRetry', error);

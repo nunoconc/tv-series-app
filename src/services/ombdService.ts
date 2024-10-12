@@ -9,6 +9,12 @@ class OMDBService {
     private instance: AxiosInstance;
 
     constructor() {
+        if (!this.httpUri || !this.apiKey) {
+            throw new Error(
+                'OMDBService - Invalid configuration - Check .env file for the api values'
+            );
+        }
+
         this.instance = setupCache(
             axios.create({
                 baseURL: this.httpUri,
