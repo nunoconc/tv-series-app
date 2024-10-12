@@ -23,42 +23,42 @@ export type OmdbEpisode = {
 
 
 export const EpisodeForm: {
-    id: keyof Episode;
+    key: keyof Episode;
     label: string;
     type: 'string' | 'number';
 }[] = [
     {
-        id: 'title',
+        key: 'title',
         label: 'Title',
         type: 'string',
     },
     {
-        id: 'series',
+        key: 'series',
         label: 'Series',
         type: 'string',
     },
     {
-        id: 'description',
+        key: 'description',
         label: 'Description',
         type: 'string',
     },
     {
-        id: 'seasonNumber',
+        key: 'seasonNumber',
         label: 'Season',
         type: 'number',
     },
     {
-        id: 'episodeNumber',
+        key: 'episodeNumber',
         label: 'Episode',
         type: 'number',
     },
     {
-        id: 'releaseDate',
+        key: 'releaseDate',
         label: 'Release Date',
         type: 'string',
     },
     {
-        id: 'imdbId',
+        key: 'imdbId',
         label: 'IMDB ID',
         type: 'string',
     },

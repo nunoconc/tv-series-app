@@ -6,6 +6,8 @@ import { CREATE_EPISODE, UPDATE_EPISODE } from '../../graphQL/mutations';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/appContext';
 import Loading from '../loading';
+import { wait } from '@apollo/client/testing';
+import lodash from 'lodash';
 
 interface IForm {
     episode?: Episode;
@@ -18,15 +20,17 @@ function Form({ episode, onCancel }: IForm) {
     const navigate = useNavigate();
     const context = useAppContext();
 
-    const handleOmdb = () => {
+    const handleOmdb = async () => {
         const imdbId = (
             document.getElementById('input_imdbId') as HTMLInputElement
         ).value;
         if (imdbId) {
+            // improve user experience felling
             setLoading(true);
+            await wait(500);
             context.omdbServiceInstance
                 ?.getEpisode(imdbId)
-                .then(setFormEpisode)
+                .then((ep) => setFormEpisode(lodash.mergeWith(formEpisode, ep)))
                 .finally(() => setLoading(false));
         }
     };
@@ -35,21 +39,31 @@ function Form({ episode, onCancel }: IForm) {
         episode ? UPDATE_EPISODE : CREATE_EPISODE
     );
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement);
 
-        const newEpisode = {
-            id: episode?.id || Date.now().toString(36),
-            title: formData.get('title') as string,
-            series: formData.get('series') as string,
-            description: formData.get('description') as string,
-            seasonNumber: parseInt(formData.get('seasonNumber') as string),
-            episodeNumber: parseInt(formData.get('episodeNumber') as string),
-            releaseDate: formData.get('releaseDate') as string,
-            imdbId: formData.get('imdbId') as string,
-        };
+        const newEpisode = EpisodeForm.reduce(
+            (acc, form) => {
+                if (form.type === 'number') {
+                    acc = {
+                        ...acc,
+                        [form.key]: parseInt(formData.get(form.key) as string),
+                    };
+                } else {
+                    acc = {
+                        ...acc,
+                        [form.key]: formData.get(form.key) as string,
+                    };
+                }
+                return acc;
+            },
+            {
+                id: episode?.id || Date.now().toString(36),
+            } as Episode
+        );
 
+        setLoading(true);
         createOrUpdate({
             variables: {
                 episode: newEpisode,
@@ -62,28 +76,36 @@ function Form({ episode, onCancel }: IForm) {
             .catch((error) => {
                 alert('Something went wrong, please try again');
                 console.log(error);
-            });
+            })
+            .finally(() => setLoading(false));
     };
 
     return (
-        <form
-            className="w-full h-full p-6 space-y-3"
-            onSubmit={handleSubmit}
-        >
+        <form className="w-full h-full p-6 space-y-3" onSubmit={handleSubmit}>
             <label className="block text-lg font-bold">
                 Please insert all the episodes information bellow:
             </label>
             {EpisodeForm.map((form) => (
-                <div key={form.id}>
-                    <label className="block text-lg mb-2" htmlFor={form.id}>
+                <div key={loading ? `loading${form.key}` : form.key}>
+                    <label className="block text-lg mb-2" htmlFor={form.key}>
                         <strong>{form.label}:</strong>
                     </label>
                     <input
-                        id={`input_${form.id}`}
-                        name={form.id}
+                        id={`input_${form.key}`}
+                        name={form.key}
                         type={form.type}
                         required
-                        defaultValue={formEpisode?.[form.id]}
+                        defaultValue={formEpisode?.[form.key]}
+                        onChange={() =>
+                            setFormEpisode({
+                                ...formEpisode,
+                                [form.key]: (
+                                    document.getElementById(
+                                        `input_${form.key}`
+                                    ) as HTMLInputElement
+                                ).value,
+                            } as Episode)
+                        }
                         className="w-full p-3 border rounded"
                     />
                 </div>

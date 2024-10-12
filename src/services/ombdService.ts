@@ -58,7 +58,6 @@ class OMDBService {
             const data = response?.data as OmdbEpisode;
 
             return {
-                id: '',
                 title: data.Title,
                 series: data.Series,
                 description: data.Plot,
