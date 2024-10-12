@@ -26,18 +26,18 @@ function Item({ episode }: IItem) {
 
     return (
         <tr className="table-row">
-            <th className="py-3 px-6 text-left flex items-center">
+            <th className="py-3 px-6 text-left flex flex-col sm:flex-row items-center">
                 <div
-                    className="h-20 w-20 bg-blackv cursor-pointer"
+                    className="h-10 w-10  sm:h-20 sm:w-20 aspect-square cursor-pointer mx-1/2"
                     onClick={navigateToDetails}
                 >
                     <img
-                        className="h-full w-full mx-1/2"
+                        className="h-full w-full rounded"
                         alt={'TV'}
                         src={imageUrl || '../favicon-192x192.png'}
                     />
                 </div>
-                <span className="px-6 text-left">{episode.title}</span>
+                <span className="sm:px-6 text-left">{episode.title}</span>
             </th>
             <th className="px-6 items-center text-left">{episode.series}</th>
             <th className="px-6 items-center">

@@ -3,28 +3,39 @@ import IconButton from '../iconButton';
 import { useMutation } from '@apollo/client';
 import { DELETE_EPISODE } from '../../graphQL/mutations';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Loading from '../loading';
 
 interface IDelete {
-    id: string
+    id: string;
     onCancel: () => void;
 }
 
 function Confirmation({ id, onCancel }: IDelete) {
+    const [loading, setLoading] = React.useState(false);
     const navigate = useNavigate();
     const [deleteEpisode] = useMutation(DELETE_EPISODE);
 
     const handleDeleteMutation = () => {
+        setLoading(true);
         deleteEpisode({
             variables: {
                 id,
             },
-        }).then(() => {
-            navigate('/');
         })
-        .catch((error) => {
-            alert('Something went wrong, please try again');
-            console.log(error);
-        });
+            .then(async () => {
+                navigate('/list');
+            })
+            .catch((error) => {
+                toast('Something went wrong: Please try again!', {
+                    type: 'error',
+                });
+                console.log(error.message);
+            })
+            .finally(() => {
+                setLoading(false);
+                onCancel();
+            });
     };
 
     return (
@@ -36,6 +47,7 @@ function Confirmation({ id, onCancel }: IDelete) {
                 <IconButton icon={'cancel'} onClick={onCancel} />
                 <IconButton icon={'confirm'} onClick={handleDeleteMutation} />
             </div>
+            {loading && <Loading />}
         </div>
     );
 }

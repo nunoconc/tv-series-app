@@ -9,6 +9,7 @@ import DetailsPage from '../pages/DetailsPage';
 import Header from '../components/header';
 import Loading from '../components/loading';
 import Error from '../components/error';
+import SubscriptionsNavigation from './subscriptionsNavigation';
 
 function Router() {
     const LoadingOrError = useCallback(
@@ -42,7 +43,12 @@ function Router() {
         },
     ]);
 
-    return <RouterProvider router={router} />;
+    return (
+        <>
+            <RouterProvider router={router} />
+            <SubscriptionsNavigation />
+        </>
+    );
 }
 
 export default Router;

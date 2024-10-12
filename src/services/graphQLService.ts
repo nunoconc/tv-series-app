@@ -27,6 +27,12 @@ function init() {
             connectionParams: {
                 'x-api-key': apiKey,
             },
+            shouldRetry: (error) => {
+                console.log('shouldRetry', error);
+                return false;
+            },
+            keepAlive: 10_000,
+            lazy: true,
         })
     );
 

@@ -24,7 +24,7 @@ function List({ episodes }: IList) {
                         Title
                     </th>
                     <th className="py-3 px-6 text-left font-semibold">Series</th>
-                    <th className="py-3 px-6 text-left font-semibold w-10 text-center">
+                    <th className="py-3 px-6 text-left font-semibold w-10">
                         Actions
                     </th>
                 </tr>

@@ -33,7 +33,7 @@ function IDetails({ episode }: IDetails) {
                     <img
                         className="h-full w-full object-cover rounded-lg shadow-md"
                         alt={'Movie Poster'}
-                        src={imageUrl || '../favicon-192x192.png'}
+                        src={imageUrl || '../favicon-512x512.png'}
                     />
                 </div>
                 <div className="md:w-1/2 p-4">

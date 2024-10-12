@@ -8,6 +8,7 @@ import { useAppContext } from '../../context/appContext';
 import Loading from '../loading';
 import { wait } from '@apollo/client/testing';
 import lodash from 'lodash';
+import { toast } from 'react-toastify';
 
 interface IForm {
     episode?: Episode;
@@ -40,6 +41,8 @@ function Form({ episode, onCancel }: IForm) {
     );
 
     const handleSubmit = async (event: React.FormEvent) => {
+        setLoading(true);
+
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement);
 
@@ -63,7 +66,6 @@ function Form({ episode, onCancel }: IForm) {
             } as Episode
         );
 
-        setLoading(true);
         createOrUpdate({
             variables: {
                 episode: newEpisode,
@@ -74,8 +76,10 @@ function Form({ episode, onCancel }: IForm) {
                 onCancel();
             })
             .catch((error) => {
-                alert('Something went wrong, please try again');
-                console.log(error);
+                toast('Something went wrong: Please try again!', {
+                    type: 'error',
+                });
+                console.log(error.message);
             })
             .finally(() => setLoading(false));
     };
